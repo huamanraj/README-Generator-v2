@@ -287,7 +287,7 @@ ${repoData.topics && repoData.topics.length > 0 ? `- Topics: ${repoData.topics.j
 }
 
 // Generate README with Gemini AI
-async function generateReadmeWithAI(repoData, additionalInfo = {}) {
+async function generateReadmeWithAI(repoData, additionalInfo = {}, owner, repo) {
     try {
         console.log('Generating README with AI...');
         
@@ -438,7 +438,7 @@ app.post('/api/generate-readme', async (req, res) => {
         const { owner, repo } = extractRepoInfo(repoUrl);
         const repoData = await getRepoData(owner, repo);
         
-        const { readme, isGenericFallback } = await generateReadmeWithAI(repoData);
+        const { readme, isGenericFallback } = await generateReadmeWithAI(repoData, {}, owner, repo);
 
         return res.status(200).json({ readme, repoData, isGenericFallback });
     } catch (error) {
@@ -463,7 +463,7 @@ app.post('/api/generate-readme-detailed', async (req, res) => {
         const repoData = await getRepoData(owner, repo);
         console.log('Retrieved repo data successfully');
         
-        const { readme, isGenericFallback } = await generateReadmeWithAI(repoData, additionalInfo);
+        const { readme, isGenericFallback } = await generateReadmeWithAI(repoData, additionalInfo, owner, repo);
         
         console.log('Generated README, sending response');
         console.log('Is generic fallback:', isGenericFallback);
