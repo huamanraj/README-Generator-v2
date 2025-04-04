@@ -309,43 +309,40 @@ async function generateReadmeWithAI(repoData, additionalInfo = {}) {
         }
         
         const prompt = `
-Generate a professional GitHub README.md for the repository with the following details:
+Generate a professional GitHub README.md for the following repository:
 
-Repository Name: ${repoData.name || 'Repository'}
+# Repository Info
+Name: ${repoData.name || 'Repository'}
 Description: ${repoData.description || additionalInfo.description || 'No description provided'}
-Main Languages: ${repoData.languages && repoData.languages.length > 0 ? repoData.languages.join(', ') : 'Not specified'}
+Languages: ${repoData.languages?.join(', ') || 'Not specified'}
 ${additionalInfo.techStack ? `Tech Stack: ${additionalInfo.techStack}` : ''}
-${repoData.topics && repoData.topics.length > 0 ? `Topics: ${repoData.topics.join(', ')}` : ''}
+${repoData.topics?.length ? `Topics: ${repoData.topics.join(', ')}` : ''}
 Stars: ${repoData.stars || 0}
 Forks: ${repoData.forks || 0}
-Open Issues: ${repoData.issues || 0}
+Issues: ${repoData.issues || 0}
 
+# Content Sections
 ${additionalInfo.features ? `Features:\n${additionalInfo.features}` : ''}
-
 ${additionalInfo.installation ? `Installation:\n${additionalInfo.installation}` : ''}
-
 ${additionalInfo.usage ? `Usage:\n${additionalInfo.usage}` : ''}
-
 ${additionalInfo.contributing ? `Contributing:\n${additionalInfo.contributing}` : ''}
+License: ${repoData.license || additionalInfo.license || 'MIT'}
+${contactSection ? `Contact:\n${contactSection}` : ''}
 
-License: ${repoData.license || additionalInfo.license || 'Not specified'}
+Create a complete, professional README with:
+- Clear project title with logo/banner if available
+- Concise description with badges for build status, version, license
+- Quick start section for immediate implementation
+- Detailed features with bullet points or screenshots
+- Installation steps in code blocks with command examples
+- Usage examples with code snippets
+- API documentation if applicable
+- Contributing guidelines
+- License information
+- Support/contact details
 
-${contactSection}
-
-Please format the README with the following sections:
-1. A title with the repository name
-2. A brief description
-3. Features
-4. Technologies/Stack
-5. Installation instructions
-6. Usage examples
-7. Contributing guidelines
-8. License information
-${contactSection ? '9. Contact/Support section with the provided contact details' : ''}
-
-Use markdown formatting with headings, code blocks, lists, and other elements to make the README visually appealing and professional.
-Add relevant badges for the license, language versions, build status, etc.
-Do not include any placeholders or "[Your Name]" style elements - create a complete, ready-to-use README.
+Use modern markdown formatting with proper heading hierarchy, code syntax highlighting, tables where appropriate, and emoji for visual appeal.
+The README should be ready for immediate use without requiring edits.
 `;
 
         console.log('Sending prompt to Gemini API...');
