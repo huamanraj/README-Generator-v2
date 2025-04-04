@@ -348,8 +348,7 @@ const DetailsPage = () => {
                         </svg>
                         <div>
                             <h3 className="font-tomorrow font-semibold">Server Connection Error</h3>
-                            <p>Cannot connect to the backend server. Please ensure the server is running with:</p>
-                            <div className="mt-2 bg-darker p-2 rounded font-mono text-sm">cd server && npm start</div>
+                            <p>Cannot connect to the backend server. Please try again later or check your internet connection.</p>
                         </div>
                     </div>
                 </div>
@@ -372,7 +371,7 @@ const DetailsPage = () => {
                                     >
                                         {currentStep > index + 1 ? (
                                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 011.414-1.414L8 12.586l7.293-7.293a1 1 010 1.414z" clipRule="evenodd" />
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 010 1.414z" clipRule="evenodd" />
                                             </svg>
                                         ) : (
                                             index + 1

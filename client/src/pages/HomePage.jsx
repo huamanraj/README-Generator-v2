@@ -108,8 +108,7 @@ const HomePage = () => {
                         </svg>
                         <div>
                             <h3 className="font-tomorrow font-semibold">Server Connection Error</h3>
-                            <p>Cannot connect to the backend server. Please ensure the server is running with:</p>
-                            <div className="mt-2 bg-darker p-2 rounded font-mono text-sm">cd server && npm start</div>
+                            <p>Cannot connect to the backend server. Please try again later or check your internet connection.</p>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
  * API utility functions for making requests to the server
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'https://readmegeneratorbackend.vercel.app/api';
 
 /**
  * Make a POST request to the API
@@ -41,7 +41,7 @@ export async function postRequest(endpoint, data) {
     // Check if it's a network error (server not available)
     if (error.message === 'Failed to fetch' || error.name === 'TypeError') {
       throw new Error(
-        'Cannot connect to the server. Please make sure the server is running at http://localhost:3000'
+        'Cannot connect to the server. Please try again later.'
       );
     }
     
@@ -56,7 +56,7 @@ export async function postRequest(endpoint, data) {
  */
 export async function checkServerAvailability() {
   try {
-    const response = await fetch(`${API_BASE_URL}/health`, { 
+    const response = await fetch(`${API_BASE_URL.replace('/api', '')}/`, { 
       method: 'GET',
       // Set a timeout of 2 seconds
       signal: AbortSignal.timeout(2000)
