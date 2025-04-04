@@ -8,6 +8,52 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Rate limiting implementation
+const rateLimit = {
+    requests: 0,
+    maxRequests: 100,
+    resetTime: Date.now() + 3600000, // 1 hour from now
+    
+    // Check if rate limit exceeded
+    isLimited() {
+        // Reset counter if the hour has passed
+        if (Date.now() > this.resetTime) {
+            this.requests = 0;
+            this.resetTime = Date.now() + 3600000;
+        }
+        
+        return this.requests >= this.maxRequests;
+    },
+    
+    // Increment request counter
+    increment() {
+        // Reset counter if the hour has passed
+        if (Date.now() > this.resetTime) {
+            this.requests = 0;
+            this.resetTime = Date.now() + 3600000;
+        }
+        
+        this.requests++;
+    }
+};
+
+// Rate limiting middleware
+const rateLimitMiddleware = (req, res, next) => {
+    if (rateLimit.isLimited()) {
+        return res.status(429).json({ 
+            error: 'Rate limit exceeded', 
+            message: 'Too many requests, please try again later',
+            resetAt: new Date(rateLimit.resetTime).toISOString()
+        });
+    }
+    
+    rateLimit.increment();
+    next();
+};
+
+// Apply rate limiting to all routes
+app.use(rateLimitMiddleware);
+
 // Middleware
 app.use(cors({
     origin: '*',
@@ -423,7 +469,7 @@ app.post('/api/generate-readme-detailed', async (req, res) => {
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json({ 
         status: 'ok', 
         message: 'Server is running',
