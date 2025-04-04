@@ -313,6 +313,9 @@ Generate a professional GitHub README.md for the following repository:
 
 # Repository Info
 Name: ${repoData.name || 'Repository'}
+Owner: ${owner || 'Not specified'}
+Full Name: ${repoData.fullName || `${owner}/${repo}`}
+URL: ${repoData.url || `https://github.com/${owner}/${repo}`}
 Description: ${repoData.description || additionalInfo.description || 'No description provided'}
 Languages: ${repoData.languages?.join(', ') || 'Not specified'}
 ${additionalInfo.techStack ? `Tech Stack: ${additionalInfo.techStack}` : ''}
@@ -320,6 +323,8 @@ ${repoData.topics?.length ? `Topics: ${repoData.topics.join(', ')}` : ''}
 Stars: ${repoData.stars || 0}
 Forks: ${repoData.forks || 0}
 Issues: ${repoData.issues || 0}
+Created: ${repoData.createdAt ? new Date(repoData.createdAt).toLocaleDateString() : 'Unknown'}
+Last Updated: ${repoData.updatedAt ? new Date(repoData.updatedAt).toLocaleDateString() : 'Unknown'}
 
 # Content Sections
 ${additionalInfo.features ? `Features:\n${additionalInfo.features}` : ''}
@@ -328,6 +333,7 @@ ${additionalInfo.usage ? `Usage:\n${additionalInfo.usage}` : ''}
 ${additionalInfo.contributing ? `Contributing:\n${additionalInfo.contributing}` : ''}
 License: ${repoData.license || additionalInfo.license || 'MIT'}
 ${contactSection ? `Contact:\n${contactSection}` : ''}
+${repoData.contributors?.length ? `Contributors: ${repoData.contributors.map(c => '@' + c.login).join(', ')}` : ''}
 
 Create a complete, professional README with:
 - Clear project title with logo/banner if available

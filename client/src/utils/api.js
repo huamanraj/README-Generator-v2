@@ -12,7 +12,7 @@ const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'https://readmegenerato
  */
 export async function postRequest(endpoint, data) {
   try {
-    console.log(`Making POST request to ${API_BASE_URL}${endpoint}`);
+    // console.log(`Making POST request to ${API_BASE_URL}${endpoint}`);
     
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
@@ -23,7 +23,7 @@ export async function postRequest(endpoint, data) {
     });
 
     const responseData = await response.json();
-    console.log(`Received response from ${endpoint}:`, responseData);
+    // console.log(`Received response from ${endpoint}:`, responseData);
 
     if (!response.ok) {
       // Extract the most specific error message available
