@@ -56,7 +56,11 @@ app.use(rateLimitMiddleware);
 
 // Middleware
 app.use(cors({
-    origin: '*',
+    origin: [
+        'https://readme-generator-v2-client.vercel.app',
+        'https://readmegenerator.amanraj.me',
+        'https://readmegeneratorbackend.vercel.app'
+    ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
