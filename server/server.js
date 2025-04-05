@@ -59,7 +59,8 @@ app.use(cors({
     origin: [
         'https://readme-generator-v2-client.vercel.app',
         'https://readmegenerator.amanraj.me',
-        'https://readmegeneratorbackend.vercel.app'
+        'https://readmegeneratorbackend.vercel.app',
+        'http://localhost:5173'
     ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
