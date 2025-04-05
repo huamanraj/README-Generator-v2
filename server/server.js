@@ -59,8 +59,8 @@ app.use(cors({
     origin: [
         'https://readme-generator-v2-client.vercel.app',
         'https://readmegenerator.amanraj.me',
-        'https://readmegeneratorbackend.vercel.app',
-        'http://localhost:5173'
+        'https://readmegeneratorbackend.vercel.app'
+        
     ],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -348,7 +348,7 @@ Create a complete, professional README with:
 - License information
 - Support/contact details
 
-Use modern markdown formatting with proper heading hierarchy, code syntax highlighting, tables where appropriate, and emoji for visual appeal.
+Use modern markdown formatting with proper heading hierarchy, code syntax highlighting, and emoji for visual appeal.
 The README should be ready for immediate use without requiring edits.
 `;
 
